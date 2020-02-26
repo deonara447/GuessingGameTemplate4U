@@ -18,16 +18,21 @@ namespace GuessingGameTemplate4U
         //variable that can be used throughout the program 
         public static Random randNum = new Random();
         int rand = randNum.Next(1, 101);
-
+       
         public MainScreen()
         {
+
             InitializeComponent();
         }
 
         private void guessButton_Click(object sender, EventArgs e)
         {
             
+            
             int guess = Convert.ToInt16(inputBox.Text);
+            Form1.marks.Add(guess);
+            int test = Form1.marks.Count();
+            label1.Text += "\n" + Form1.marks[test-1];
 
             //TODO add guess to List of guesses on Form1
 
@@ -45,9 +50,17 @@ namespace GuessingGameTemplate4U
                 outputLabel.Text = "You Got it!";
                 Refresh();
                 Thread.Sleep(1000);
+                Form f = this.FindForm();
 
+                f.Controls.Remove(this);
                 //TODO close this screen and open a Results Screen (you need to create this)
 
+
+
+
+                // Add the User Control to the Form 
+                UserControl1 ss = new UserControl1();
+                f.Controls.Add(ss);
             }
 
             inputBox.Text = "";
